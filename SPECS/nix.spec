@@ -1,13 +1,13 @@
-%global git_sha 2cd1a5b8f31627a09ac34afcbb0f76e90606204f
+%global git_rev 2.4pre-rc1
 
 Name:           nix
-Version:        2.4.0~1.g2cd1a5b8
-Release:        2%{?dist}
+Version:        2.4.0~pre.rc1
+Release:        1%{?dist}
 Summary:        Nix is a purely functional package manager
 
 License:        LGPLv2+
 URL:            https://nixos.org/nix
-Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
+Source0:        https://github.com/NixOS/nix/archive/%{git_rev}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
@@ -56,7 +56,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n %{name}-%{git_sha}
+%setup -q -n %{name}-%{git_rev}
 
 
 %build
@@ -159,6 +159,9 @@ done
 
 
 %changelog
+* Thu Oct 14 2021 Piotr Szubiakowski - 2.4.0~pre.rc1-1
+- update version to 2.4pre-rc1
+
 * Thu Aug 19 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-2
 - make busybox a runtime dependency
 - remove init files
