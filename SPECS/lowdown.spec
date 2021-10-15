@@ -1,12 +1,11 @@
 Name:           lowdown
-Version:        0.8.6
-Release:        2%{?dist}
+Version:        0.9.2
+Release:        1%{?dist}
 Summary:        Simple markdown translator
 License:        ICS
 URL:            https://kristaps.bsd.lv/lowdown/
 %undefine       _disable_source_fetch
-Source0:        https://github.com/kristapsdz/lowdown/archive/refs/tags/VERSION_0_8_6.tar.gz
-%define         SHA256SUM0 79577279cf125cdb7b8e88c2e94b2ce01e3ec1e84623bdb6f40997a3bf1a1b9c
+Source0:        https://github.com/kristapsdz/lowdown/archive/refs/tags/VERSION_0_9_2.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -30,7 +29,7 @@ on the project's site (https://kristaps.bsd.lv/lowdown/)
 
 %prep
 echo "%SHA256SUM0  %SOURCE0" | sha256sum -c -
-%setup -n %{name}-VERSION_0_8_6
+%setup -n %{name}-VERSION_0_9_2
 
 %build
 export CFLAGS='%{build_cflags} -fPIC'
@@ -56,6 +55,9 @@ chmod -R u+w $RPM_BUILD_ROOT
 %{_mandir}/man5/*
 
 %changelog
+* Fri Oct 15 2021 Piotr Szubiakowski - 0.9.2-1
+- update to v9.2
+
 * Thu Feb 12 2021 Piotr Szubiakowski - 0.8.6-2
 - add -fPIC flag
 
