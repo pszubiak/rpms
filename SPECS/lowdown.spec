@@ -28,7 +28,6 @@ For details about the programming API, please see the docs
 on the project's site (https://kristaps.bsd.lv/lowdown/)
 
 %prep
-echo "%SHA256SUM0  %SOURCE0" | sha256sum -c -
 %setup -n %{name}-VERSION_0_9_2
 
 %build
