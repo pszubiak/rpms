@@ -1,7 +1,7 @@
-%global git_rev 2.4pre-rc1
+%global git_rev 2.4
 
 Name:           nix
-Version:        2.4.0~pre.rc1
+Version:        2.4.0
 Release:        1%{?dist}
 Summary:        Nix is a purely functional package manager
 
