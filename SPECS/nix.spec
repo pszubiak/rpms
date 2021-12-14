@@ -1,7 +1,7 @@
-%global git_rev 2.4
+%global git_rev 2.5.0
 
 Name:           nix
-Version:        2.4.0
+Version:        2.5.0
 Release:        1%{?dist}
 Summary:        Nix is a purely functional package manager
 
@@ -159,6 +159,12 @@ done
 
 
 %changelog
+* Tue Dec 14 2021 Piotr Szubiakowski - 2.5.0-1
+- update version to 2.5.0
+
+* Fri Dec 10 2021 Piotr Szubiakowski - 2.4.0-1
+- update version to 2.4.0
+
 * Thu Oct 14 2021 Piotr Szubiakowski - 2.4.0~pre.rc1-1
 - update version to 2.4pre-rc1
 
