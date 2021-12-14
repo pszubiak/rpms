@@ -27,6 +27,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  gcc-toolset-9-gcc-c++
 %endif
 BuildRequires:  gtest-devel
+BuildRequires:  gmock-devel
 BuildRequires:  jq
 BuildRequires:  libarchive-devel
 BuildRequires:  libcpuid-devel
