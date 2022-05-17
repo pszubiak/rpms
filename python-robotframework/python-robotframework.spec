@@ -1,12 +1,12 @@
 %global srcname robotframework
 
 Name:           python-%{srcname}
-Version:        4.1.3
-Release:        2%{?dist}
+Version:        5.0.1
+Release:        1%{?dist}
 Summary:        Generic automation framework for acceptance testing and RPA
 License:        ASL 2.0
 URL:            https://github.com/robotframework/robotframework
-Source0:        %{url}/archive/refs/tags/v4.1.3.tar.gz
+Source0:        %{url}/archive/refs/tags/v%{version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -60,6 +60,9 @@ Summary:        %{summary}
 
 
 %changelog
+* Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 5.0.1-1
+- Update to 5.0.1
+
 * Fri May 13 2022 Piotr Szubiakowski <pszubiak@eso.org> - 4.1.3-2
 - Adapt to Fedora Python Packaging Guidelines
 
