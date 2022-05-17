@@ -52,9 +52,6 @@ Summary:        %{summary}
 %pyproject_install
 
 
-%check
-%tox
-
 %files -n python3-%{srcname}
 %doc README.rst
 %license LICENSE
