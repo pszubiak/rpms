@@ -50,13 +50,13 @@ Summary:        %{summary}
 
 %install
 %pyproject_install
+%pyproject_save_files pytestqt
 
 
-%files -n python3-%{srcname}
+%files -n python3-%{srcname} -f %{pyproject_files}
 %doc README.rst
 %license LICENSE
-%{python3_sitelib}/pytestqt/
-%{python3_sitelib}/pytest_qt-%{version}.dist-info/
+
 
 %changelog
 * Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 4.0.2-1

@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        5.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Generic automation framework for acceptance testing and RPA
 License:        ASL 2.0
 URL:            https://github.com/robotframework/robotframework
@@ -45,21 +45,23 @@ Summary:        %{summary}
 
 %install
 %pyproject_install
+%pyproject_save_files robot
 
 
 %check
 %{python3} utest/run.py
 
 
-%files -n python3-%{srcname}
+%files -n python3-%{srcname} -f %{pyproject_files}
 %doc README.rst BUILD.rst INSTALL.rst CONTRIBUTING.rst
 %license LICENSE.txt
-%{python3_sitelib}/robot/
-%{python3_sitelib}/robotframework-%{version}.dist-info/
 %{_bindir}/*
 
 
 %changelog
+* Thu May 19 2022 Piotr Szubiakowski <pszubiak@eso.org> - 5.0.1-2
+- Use pyproject_save_files macro
+
 * Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 5.0.1-1
 - Update to 5.0.1
 

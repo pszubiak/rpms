@@ -44,13 +44,13 @@ Summary:        %{summary}
 
 %install
 %pyproject_install
+%pyproject_save_files aioredis
 
 
-%files -n python3-%{srcname}
+%files -n python3-%{srcname} -f %{pyproject_files}
 %doc README.md CONTRIBUTORS.txt
 %license LICENSE
-%{python3_sitelib}/aioredis/
-%{python3_sitelib}/aioredis-%{version}.dist-info/
+
 
 %changelog
 * Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.1-1
