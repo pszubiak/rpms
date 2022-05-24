@@ -14,7 +14,7 @@ BuildRequires:  gcc
 BuildRequires:  g++
 BuildRequires:  %{py3_dist numpy}
 BuildRequires:  %{py3_dist guidata}
-Recommends:     %{py3_dist Cython}
+BuildRequires:  %{py3_dist Cython}
 Recommends:     %{py3_dist dicom}
 Recommends:     %{py3_dist spyder}
 
