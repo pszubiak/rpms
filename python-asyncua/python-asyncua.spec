@@ -11,6 +11,10 @@ Patch0:         disable_asynctest_tests.patch
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
+BuildRequires:  %{py3_dist pytest}
+BuildRequires:  %{py3_dist anyio}
+BuildRequires:  %{py3_dist pytest-asyncio}
+BuildRequires:  %{py3_dist pytest-mock}
 
 
 %global _description %{expand:

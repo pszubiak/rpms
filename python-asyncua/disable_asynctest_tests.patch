@@ -1,16 +1,3 @@
-diff --git a/asyncua/__init__.py b/asyncua/__init__.py
-index 0bd9320..b1d4031 100644
---- a/asyncua/__init__.py
-+++ b/asyncua/__init__.py
-@@ -7,7 +7,7 @@ if sys.version_info >= (3, 8):
- else:
-     import importlib_metadata as metadata
- 
--__version__ = metadata.version("asyncua")
-+__version__ = "0.9.93"
- 
- from .common import Node, uamethod
- from .client import Client
 diff --git a/tests/test_subscriptions.py b/tests/test_subscriptions.py
 index 111a8b1..ae30782 100644
 --- a/tests/test_subscriptions.py
