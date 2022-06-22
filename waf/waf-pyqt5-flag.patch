@@ -1,0 +1,83 @@
+diff --git a/playground/pyqt5/wscript b/playground/pyqt5/wscript
+index a5e242d9349047041e084fc0bdc92cc9d5d278f7..87e02694967f146d522b5740f64e61675ced6e2c 100644
+--- a/playground/pyqt5/wscript
++++ b/playground/pyqt5/wscript
+@@ -14,16 +14,19 @@ def options(opt):
+ 	opt.load('python pyqt5')
+ 
+ def configure(conf):
++	# Recent UIC/RCC versions require explicit python generator selection
++	conf.env.QT_PYUIC_FLAGS = ['-g', 'python']
++	conf.env.QT_PYRCC_FLAGS = ['-g', 'python']
+ 	# Load also python to demonstrate mixed calls
+ 	conf.load('python pyqt5')
+-	conf.check_python_version((2,7,4))	
++	conf.check_python_version((2,7,4))
+ 
+ def build(bld):
+ 	# Demonstrates mixed usage of py and pyqt5 module, and tests also install_path and install_from
+ 	# (since generated files go into build it has to be reset inside the pyqt5 tool)
+-	bld(features="py pyqt5", source="src/sample.py src/firstgui.ui",  install_path="${PREFIX}/play/", install_from="src/") 
++	bld(features="py pyqt5", source="src/sample.py src/firstgui.ui",  install_path="${PREFIX}/play/", install_from="src/")
+ 
+-	# Simple usage on a resource file. If a file referenced inside the resource changes it will be rebuilt 
++	# Simple usage on a resource file. If a file referenced inside the resource changes it will be rebuilt
+ 	# as the qrc XML is parsed and dependencies are calculated
+-	bld(features="pyqt5", source="sampleRes.qrc") 
+-	
++	bld(features="pyqt5", source="sampleRes.qrc")
++
+diff --git a/waflib/extras/pyqt5.py b/waflib/extras/pyqt5.py
+index 9c941764cc2492213ab38453c4c612504be35c43..0c083a1247a1969583a1d6d42693f2e3ec97d574 100644
+--- a/waflib/extras/pyqt5.py
++++ b/waflib/extras/pyqt5.py
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env python
+ # encoding: utf-8
+-# Federico Pellegrin, 2016-2019 (fedepell) adapted for Python
++# Federico Pellegrin, 2016-2022 (fedepell) adapted for Python
+ 
+ """
+ This tool helps with finding Python Qt5 tools and libraries,
+@@ -137,7 +137,7 @@ class pyrcc(Task.Task):
+ 	Processes ``.qrc`` files
+ 	"""
+ 	color   = 'BLUE'
+-	run_str = '${QT_PYRCC} ${SRC} -o ${TGT}'
++	run_str = '${QT_PYRCC} ${QT_PYRCC_FLAGS} ${SRC} -o ${TGT}'
+ 	ext_out = ['.py']
+ 
+ 	def rcname(self):
+@@ -175,7 +175,7 @@ class ui5py(Task.Task):
+ 	Processes ``.ui`` files for python
+ 	"""
+ 	color   = 'BLUE'
+-	run_str = '${QT_PYUIC} ${SRC} -o ${TGT}'
++	run_str = '${QT_PYUIC} ${QT_PYUIC_FLAGS} ${SRC} -o ${TGT}'
+ 	ext_out = ['.py']
+ 
+ class ts2qm(Task.Task):
+@@ -216,17 +216,17 @@ def find_pyqt5_binaries(self):
+ 		self.find_program(['pyrcc5'], var='QT_PYRCC')
+ 		self.find_program(['pylupdate5'], var='QT_PYLUPDATE')
+ 	elif getattr(Options.options, 'want_pyside2', True):
+-		self.find_program(['pyside2-uic'], var='QT_PYUIC')
+-		self.find_program(['pyside2-rcc'], var='QT_PYRCC')
+-		self.find_program(['pyside2-lupdate'], var='QT_PYLUPDATE')
++		self.find_program(['pyside2-uic','uic-qt5'], var='QT_PYUIC')
++		self.find_program(['pyside2-rcc','rcc-qt5'], var='QT_PYRCC')
++		self.find_program(['pyside2-lupdate','lupdate-qt5'], var='QT_PYLUPDATE')
+ 	elif getattr(Options.options, 'want_pyqt4', True):
+ 		self.find_program(['pyuic4'], var='QT_PYUIC')
+ 		self.find_program(['pyrcc4'], var='QT_PYRCC')
+ 		self.find_program(['pylupdate4'], var='QT_PYLUPDATE')
+ 	else:
+-		self.find_program(['pyuic5','pyside2-uic','pyuic4'], var='QT_PYUIC')
+-		self.find_program(['pyrcc5','pyside2-rcc','pyrcc4'], var='QT_PYRCC')
+-		self.find_program(['pylupdate5', 'pyside2-lupdate','pylupdate4'], var='QT_PYLUPDATE')
++		self.find_program(['pyuic5','pyside2-uic','pyuic4','uic-qt5'], var='QT_PYUIC')
++		self.find_program(['pyrcc5','pyside2-rcc','pyrcc4','rcc-qt5'], var='QT_PYRCC')
++		self.find_program(['pylupdate5', 'pyside2-lupdate','pylupdate4','lupdate-qt5'], var='QT_PYLUPDATE')
+ 
+ 	if not env.QT_PYUIC:
+ 		self.fatal('cannot find the uic compiler for python for qt5')
