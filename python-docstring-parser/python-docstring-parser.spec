@@ -3,10 +3,10 @@
 Name:           python-%{srcname}
 Version:        0.14.1
 Release:        1%{?dist}
-Summary:        Parse Python docstrings.
+Summary:        Parse Python docstrings
 License:        MIT
 URL:            https://github.com/rr-/docstring_parser
-Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
+Source:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -17,16 +17,14 @@ BuildRequires:  %{py3_dist pytest}
 Parse Python docstrings. Currently support ReST, Google, Numpydoc-style and Epydoc docstrings.}
 
 
-%description
-%{_description}
+%description %{_description}
 
 
 %package -n python3-%{srcname}
 Summary:        %{summary}
 
 
-%description -n python3-%{srcname}
-%{_description}
+%description -n python3-%{srcname} %{_description}
 
 
 %prep
@@ -56,5 +54,8 @@ Summary:        %{summary}
 
 
 %changelog
+* Wed Jul 20 2022 Piotr Szubiakowski <pszubiak@eso.org> - 0.14.1-2
+- Apply code review fixes
+
 * Thu May 19 2022 Piotr Szubiakowski <pszubiak@eso.org> - 0.14.1-1
 - Init
