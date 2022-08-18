@@ -1,0 +1,22 @@
+diff --git a/ext/test/http/curl_http_test.cc b/ext/test/http/curl_http_test.cc
+index 3059faa..ed54b43 100644
+--- a/ext/test/http/curl_http_test.cc
++++ b/ext/test/http/curl_http_test.cc
+@@ -337,7 +337,7 @@ TEST_F(BasicCurlHttpTests, SendGetRequestSyncTimeout)
+               result.GetSessionState() == http_client::SessionState::SendFailed);
+ }
+ 
+-TEST_F(BasicCurlHttpTests, SendPostRequestSync)
++TEST_F(BasicCurlHttpTests, DISABLED_SendPostRequestSync)
+ {
+   received_requests_.clear();
+   curl::HttpClientSync http_client;
+@@ -439,7 +439,7 @@ TEST_F(BasicCurlHttpTests, SendGetRequestAsyncTimeout)
+   }
+ }
+ 
+-TEST_F(BasicCurlHttpTests, SendPostRequestAsync)
++TEST_F(BasicCurlHttpTests, DISABLED_SendPostRequestAsync)
+ {
+   curl::HttpClient http_client;
+ 
