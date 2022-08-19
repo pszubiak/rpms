@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        The C++ OpenTelemetry client
 License:        ASL-2.0
 URL:            https://opentelemetry.io/
-Source:         https://github.com/open-telemetry/%{name}/archive/%{version}/v%{version}.tar.gz
+Source:         https://github.com/open-telemetry/opentelemetry-cpp/archive/refs/tags/v%{version}.tar.gz
 Patch0:         disable_problematic_utests.patch
 
 BuildRequires:  cmake
