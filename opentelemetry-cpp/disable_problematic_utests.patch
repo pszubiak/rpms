@@ -1,7 +1,16 @@
 diff --git a/ext/test/http/curl_http_test.cc b/ext/test/http/curl_http_test.cc
-index 3059faa..cc5a66b 100644
+index 3059faa..bf05901 100644
 --- a/ext/test/http/curl_http_test.cc
 +++ b/ext/test/http/curl_http_test.cc
+@@ -246,7 +246,7 @@ TEST_F(BasicCurlHttpTests, SendGetRequest)
+   ASSERT_TRUE(handler->got_response_);
+ }
+ 
+-TEST_F(BasicCurlHttpTests, SendPostRequest)
++TEST_F(BasicCurlHttpTests, DISABLED_SendPostRequest)
+ {
+   received_requests_.clear();
+   auto session_manager = http_client::HttpClientFactory::Create();
 @@ -337,7 +337,7 @@ TEST_F(BasicCurlHttpTests, SendGetRequestSyncTimeout)
                result.GetSessionState() == http_client::SessionState::SendFailed);
  }
