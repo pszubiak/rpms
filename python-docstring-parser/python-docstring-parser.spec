@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        0.14.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Parse Python docstrings
 License:        MIT
 URL:            https://github.com/rr-/docstring_parser

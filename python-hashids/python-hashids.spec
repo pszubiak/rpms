@@ -2,8 +2,8 @@
 
 Name:           python-%{srcname}
 Version:        1.3.1
-Release:        1%{?dist}
-Summary:        Generate short unique ids from integers.
+Release:        2%{?dist}
+Summary:        Generate short unique ids from integers
 License:        MIT
 URL:            http://www.hashids.org/
 Source0:        https://github.com/davidaurelio/hashids-python/archive/refs/tags/v%{version}.tar.gz
@@ -20,16 +20,14 @@ It generates YouTube-like hashes from one or many numbers.
 Use hashids when you do not want to expose your database ids to the user.}
 
 
-%description
-%{_description}
+%description %{_description}
 
 
 %package -n python3-%{srcname}
 Summary:        %{summary}
 
 
-%description -n python3-%{srcname}
-%{_description}
+%description -n python3-%{srcname} %{_description}
 
 
 %prep
@@ -59,5 +57,8 @@ Summary:        %{summary}
 
 
 %changelog
+* Fri May 27 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.3.1-2
+- Fix description and summary
+
 * Fri May 27 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.3.1-1
 - Init
