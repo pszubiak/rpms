@@ -1,6 +1,6 @@
 Name:           opentelemetry-cpp
 Version:        1.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The C++ OpenTelemetry client
 License:        ASL-2.0
 URL:            https://opentelemetry.io/
@@ -12,6 +12,7 @@ BuildRequires:  libcurl-devel
 BuildRequires:  gcc
 BuildRequires:  gmock-devel
 BuildRequires:  google-benchmark-devel
+BuildRequires:  grpc-devel
 BuildRequires:  gtest-devel
 BuildRequires:  g++
 
@@ -37,7 +38,7 @@ developing applications that use %{name}.
 
 
 %build
-%cmake
+%cmake -DWITH_OTLP=ON -DWITH_JAEGER=ON -DUSE_SYSTEM_GRPC=ON
 %cmake_build
 
 
