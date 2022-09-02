@@ -1,0 +1,36 @@
+diff --git a/cmake/opentelemetry-proto.cmake b/cmake/opentelemetry-proto.cmake
+index 37d45da..95bd703 100644
+--- a/cmake/opentelemetry-proto.cmake
++++ b/cmake/opentelemetry-proto.cmake
+@@ -190,7 +190,7 @@ include_directories("${GENERATED_PROTOBUF_PATH}")
+ 
+ if(WITH_OTLP_GRPC)
+   add_library(
+-    opentelemetry_proto STATIC
++    opentelemetry_proto SHARED
+     ${COMMON_PB_CPP_FILE}
+     ${RESOURCE_PB_CPP_FILE}
+     ${TRACE_PB_CPP_FILE}
+@@ -204,7 +204,7 @@ if(WITH_OTLP_GRPC)
+     ${METRICS_SERVICE_GRPC_PB_CPP_FILE})
+ else()
+   add_library(
+-    opentelemetry_proto STATIC
++    opentelemetry_proto SHARED
+     ${COMMON_PB_CPP_FILE}
+     ${RESOURCE_PB_CPP_FILE}
+     ${TRACE_PB_CPP_FILE}
+diff --git a/exporters/jaeger/CMakeLists.txt b/exporters/jaeger/CMakeLists.txt
+index 017b43d..82ce6a6 100644
+--- a/exporters/jaeger/CMakeLists.txt
++++ b/exporters/jaeger/CMakeLists.txt
+@@ -32,8 +32,7 @@ target_include_directories(
+ 
+ target_link_libraries(
+   opentelemetry_exporter_jaeger_trace
+-  PUBLIC opentelemetry_resources opentelemetry_http_client_curl
+-  PRIVATE thrift::thrift)
++  PUBLIC opentelemetry_resources opentelemetry_http_client_curl thrift::thrift)
+ 
+ if(MSVC)
+   target_compile_definitions(opentelemetry_exporter_jaeger_trace
