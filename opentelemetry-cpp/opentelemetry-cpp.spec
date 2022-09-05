@@ -133,9 +133,10 @@ mkdir third_party/opentelemetry-proto/.git
 
 
 %changelog
-* Wed Aug 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-2
+* Wed Sep 08 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-2
+- Switch build to shared libraries
 - Add opentelemetry-proto
-- Add -DWITH_OTLP=ON -DWITH_JAEGER=ON
+- Add -DWITH_OTLP=ON -DWITH_JAEGER=ON flags
 
 * Wed Aug 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-1
 - Init
