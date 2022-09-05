@@ -77,8 +77,8 @@ mkdir third_party/opentelemetry-proto/.git
 
 
 %build
-%cmake -DWITH_OTLP=ON -DWITH_JAEGER=ON
-%cmake_build
+%cmake -DWITH_OTLP=ON -DWITH_JAEGER=ON -DWITH_OTLP_GRPC=ON
+%cmake_build -j1
 
 
 %install
