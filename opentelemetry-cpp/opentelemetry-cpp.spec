@@ -10,6 +10,7 @@ URL:            https://opentelemetry.io
 Source0:        https://github.com/open-telemetry/%{name}/archive/v%{cpp_version}/%{name}-%{cpp_version}.tar.gz
 Patch0:         disable_curl_utests.patch
 Patch1:         cmake_adapt_to_shared_libraries.patch
+Patch2:         otlp_recordable_test.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
