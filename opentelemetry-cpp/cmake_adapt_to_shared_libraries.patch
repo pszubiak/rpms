@@ -1,18 +1,23 @@
 diff --git a/cmake/opentelemetry-proto.cmake b/cmake/opentelemetry-proto.cmake
-index 37d45da..95bd703 100644
+index 37d45da..f5d4759 100644
 --- a/cmake/opentelemetry-proto.cmake
 +++ b/cmake/opentelemetry-proto.cmake
-@@ -190,7 +190,7 @@ include_directories("${GENERATED_PROTOBUF_PATH}")
+@@ -189,8 +189,9 @@ endif()
+ include_directories("${GENERATED_PROTOBUF_PATH}")
  
  if(WITH_OTLP_GRPC)
++  find_library(grpc++ grpc++)
    add_library(
 -    opentelemetry_proto STATIC
 +    opentelemetry_proto SHARED
      ${COMMON_PB_CPP_FILE}
      ${RESOURCE_PB_CPP_FILE}
      ${TRACE_PB_CPP_FILE}
-@@ -204,7 +204,7 @@ if(WITH_OTLP_GRPC)
+@@ -202,9 +203,10 @@ if(WITH_OTLP_GRPC)
+     ${LOGS_SERVICE_GRPC_PB_CPP_FILE}
+     ${METRICS_SERVICE_PB_CPP_FILE}
      ${METRICS_SERVICE_GRPC_PB_CPP_FILE})
++  target_link_libraries(opentelemetry_proto PUBLIC grpc++)
  else()
    add_library(
 -    opentelemetry_proto STATIC
