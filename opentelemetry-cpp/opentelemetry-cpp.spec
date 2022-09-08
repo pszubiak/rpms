@@ -44,7 +44,7 @@ developing applications that use %{name}.
 %package -n     opentelemetry-proto
 Version:        %{proto_version}
 Summary:        Protobuf definitions for the OpenTelemetry protocol (OTLP)
-Source1:        https://github.com/open-telemetry/%{proto_name}/archive/v%{proto_version}/opentelemetry-proto-%{proto_version}.tar.gz
+Source1:        https://github.com/open-telemetry/opentelemetry-proto/archive/v%{proto_version}/opentelemetry-proto-%{proto_version}.tar.gz
 
 
 %description -n opentelemetry-proto
