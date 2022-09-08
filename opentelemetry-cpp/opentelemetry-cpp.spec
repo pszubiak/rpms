@@ -3,11 +3,13 @@
 
 Name:           opentelemetry-cpp
 Version:        %{cpp_version}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The C++ OpenTelemetry client
 License:        ASL-2.0
 URL:            https://opentelemetry.io
 Source0:        https://github.com/open-telemetry/%{name}/archive/v%{cpp_version}/%{name}-%{cpp_version}.tar.gz
+Source2:        opentelemetry_api.pc
+Source3:        opentelemetry_sdk.pc
 Patch0:         disable_curl_utests.patch
 Patch1:         cmake_adapt_to_shared_libraries.patch
 
@@ -84,6 +86,10 @@ mkdir third_party/opentelemetry-proto/.git
 %install
 %cmake_install
 
+# Install pkg-config files
+install -p -D -m644 %{SOURCE2} -t %{buildroot}/usr/lib64/pkgconfig/
+install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
+
 
 %check
 %ctest
@@ -122,6 +128,7 @@ mkdir third_party/opentelemetry-proto/.git
 %{_includedir}/opentelemetry/std
 %{_includedir}/opentelemetry/trace
 %{_libdir}/cmake
+%{_libdir}/pkgconfig
 
 
 %files -n opentelemetry-proto
@@ -133,7 +140,10 @@ mkdir third_party/opentelemetry-proto/.git
 
 
 %changelog
-* Wed Sep 08 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-2
+* Thu Sep 08 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-3
+- Add API and SDK pkg-config files
+
+* Wed Sep 07 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-2
 - Switch build to shared libraries
 - Add opentelemetry-proto
 - Add -DWITH_OTLP=ON -DWITH_JAEGER=ON flags
