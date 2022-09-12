@@ -1,0 +1,30 @@
+--- cmake/AddGoogletest.cmake.orig	2020-01-19 16:00:53.000000000 -0700
++++ cmake/AddGoogletest.cmake	2020-01-20 12:25:23.267240086 -0700
+@@ -7,9 +7,6 @@
+ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+ set(BUILD_SHARED_LIBS OFF)
+ 
+-add_subdirectory("${CLI11_SOURCE_DIR}/extern/googletest" "${CLI11_BINARY_DIR}/extern/googletest" EXCLUDE_FROM_ALL)
+-
+-
+ if(GOOGLE_TEST_INDIVIDUAL)
+     if(NOT CMAKE_VERSION VERSION_LESS 3.9)
+         include(GoogleTest)
+@@ -44,6 +41,3 @@ macro(add_gtest TESTNAME)
+     endif()
+ 
+ endmacro()
+-
+-set_target_properties(gtest gtest_main gmock gmock_main
+-    PROPERTIES FOLDER "Extern")
+--- tests/CMakeLists.txt.orig	2020-01-19 16:00:53.000000000 -0700
++++ tests/CMakeLists.txt	2020-01-20 12:25:45.971844701 -0700
+@@ -1,8 +1,3 @@
+-if(NOT EXISTS "${CLI11_SOURCE_DIR}/extern/googletest/CMakeLists.txt")
+-    message(FATAL_ERROR "You have requested tests be built, but googletest is not downloaded. Please run:
+-    git submodule update --init")
+-endif()
+-
+ list(APPEND CMAKE_MODULE_PATH "${CLI11_SOURCE_DIR}/cmake")
+ 
+ if(CLI11_SANITIZERS)

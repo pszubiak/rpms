@@ -1,0 +1,40 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 574ca1e..f3df274 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -224,6 +224,8 @@ if(CLI11_INSTALL)
+         NAMESPACE CLI11::
+         FILE CLI11Targets.cmake)
+ 
++    include(cmake/CLI11GeneratePkgConfig.cmake)
++
+     # Register in the user cmake package registry
+     export(PACKAGE CLI11)
+ endif()
+diff --git a/cmake/CLI11.pc.in b/cmake/CLI11.pc.in
+new file mode 100644
+index 0000000..8d41873
+--- /dev/null
++++ b/cmake/CLI11.pc.in
+@@ -0,0 +1,9 @@
++prefix=@CMAKE_INSTALL_PREFIX@
++exec_prefix=${prefix}
++includedir=${prefix}/include
++
++Name: CLI11
++Description: C++ command line parser
++Version: @PROJECT_VERSION@
++
++Cflags: -I${includedir}
+diff --git a/cmake/CLI11GeneratePkgConfig.cmake b/cmake/CLI11GeneratePkgConfig.cmake
+new file mode 100644
+index 0000000..667705d
+--- /dev/null
++++ b/cmake/CLI11GeneratePkgConfig.cmake
+@@ -0,0 +1,6 @@
++configure_file("cmake/CLI11.pc.in" "CLI11.pc" @ONLY)
++
++install(FILES "${PROJECT_BINARY_DIR}/CLI11.pc"
++  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
++
++
