@@ -1,0 +1,45 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index dea76a0..97e4069 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -75,8 +75,8 @@ set_target_properties(qtadvanceddocking PROPERTIES
+     CXX_EXTENSIONS OFF
+     VERSION ${VERSION_SHORT}
+     EXPORT_NAME "qtadvanceddocking"
+-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib"
+-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib"
++    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib64"
++    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib64"
+     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/bin"
+ )
+ include(CMakePackageConfigHelpers)
+@@ -92,24 +92,24 @@ install(FILES ${ads_HEADERS}
+ install(FILES
+     "${CMAKE_CURRENT_SOURCE_DIR}/../LICENSE"
+     "${CMAKE_CURRENT_SOURCE_DIR}/../gnu-lgpl-v2.1.md"
+-    DESTINATION license/ads
++    DESTINATION share/licenses/ads
+     COMPONENT license
+ )
+ install(TARGETS qtadvanceddocking
+     EXPORT adsTargets
+     RUNTIME DESTINATION bin
+-    LIBRARY DESTINATION lib
+-    ARCHIVE DESTINATION lib
++    LIBRARY DESTINATION lib64
++    ARCHIVE DESTINATION lib64
+     INCLUDES DESTINATION include
+ )
+ 
+ install(EXPORT adsTargets
+     FILE adsTargets.cmake
+     NAMESPACE ads::
+-    DESTINATION lib/cmake/qtadvanceddocking
++    DESTINATION lib64/cmake/qtadvanceddocking
+ )
+ install(FILES qtadvanceddockingConfig.cmake "${CMAKE_CURRENT_BINARY_DIR}/qtadvanceddockingConfigVersion.cmake"
+-    DESTINATION lib/cmake/qtadvanceddocking
++    DESTINATION lib64/cmake/qtadvanceddocking
+ )
+ 
+ target_include_directories(qtadvanceddocking PUBLIC
