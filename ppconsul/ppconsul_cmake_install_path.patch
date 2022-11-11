@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ecc5f04..b08c57a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -91,7 +91,7 @@ install(
+     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+ )
+ 
+-install(EXPORT ${CMAKE_PROJECT_NAME} DESTINATION cmake FILE ppconsulConfig.cmake)
++install(EXPORT ${CMAKE_PROJECT_NAME} DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake" FILE ppconsulConfig.cmake)
+ export(EXPORT ${CMAKE_PROJECT_NAME} FILE ppconsulConfig.cmake)
+ 
+ # Generate and install pkg-config file
