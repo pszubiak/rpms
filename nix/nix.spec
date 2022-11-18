@@ -1,5 +1,5 @@
 Name:           nix
-Version:        2.10.3
+Version:        2.11.1
 Release:        1%{?dist}
 Summary:        Nix is a purely functional package manager
 
@@ -10,6 +10,7 @@ Source0:        https://github.com/NixOS/nix/archive/%{version}.tar.gz
 BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
 BuildRequires:  automake
+BuildRequires:  aws-sdk-cpp-devel
 BuildRequires:  bison
 BuildRequires:  busybox
 BuildRequires:  chrpath
