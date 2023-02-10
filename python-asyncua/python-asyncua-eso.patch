@@ -1,0 +1,28 @@
+diff --git a/asyncua/server/address_space.py b/asyncua/server/address_space.py
+index b6c4e0a..199f6ac 100644
+--- a/asyncua/server/address_space.py
++++ b/asyncua/server/address_space.py
+@@ -582,7 +582,12 @@ class MethodService:
+                 res.StatusCode = ua.StatusCode(ua.StatusCodes.BadNothingToDo)
+             else:
+                 try:
+-                    result = await self._run_method(node.call, method.ObjectId, *method.InputArguments)
++                    if (method.InputArguments == None):
++                        input_args = []
++                    else:
++                        input_args = method.InputArguments
++                    #result = await self._run_method(node.call, method.ObjectId, *method.InputArguments)
++                    result = await self._run_method(node.call, method.ObjectId, *input_args)
+                 except Exception:
+                     self.logger.exception("Error executing method call %s, an exception was raised: ", method)
+                     res.StatusCode = ua.StatusCode(ua.StatusCodes.BadUnexpectedError)
+@@ -593,7 +598,8 @@ class MethodService:
+                         res.StatusCode = result
+                     else:
+                         res.OutputArguments = result
+-                    while len(res.InputArgumentResults) < len(method.InputArguments):
++                    #while len(res.InputArgumentResults) < len(method.InputArguments):
++                    while len(res.InputArgumentResults) < len(input_args):                    
+                         res.InputArgumentResults.append(ua.StatusCode())
+         return res
+ 
