@@ -1,0 +1,14 @@
+diff --git a/asyncua/server/address_space.py b/asyncua/server/address_space.py
+index 20503b6..3c5f96a 100644
+--- a/asyncua/server/address_space.py
++++ b/asyncua/server/address_space.py
+@@ -577,6 +577,9 @@ class MethodService:
+                 res.StatusCode = ua.StatusCode(ua.StatusCodes.BadNothingToDo)
+             else:
+                 try:
++                    if method.InputArguments is None:
++                        # An array value can also be None
++                        method.InputArguments = []
+                     result = await self._run_method(node.call, method.ObjectId, *method.InputArguments)
+                 except Exception:
+                     self.logger.exception("Error executing method call %s, an exception was raised: ", method)

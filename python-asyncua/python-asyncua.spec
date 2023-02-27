@@ -2,13 +2,13 @@
 
 Name:           python-%{srcname}
 Version:        0.9.93
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        OPC UA / IEC 62541 Client and Server for Python >= 3.7 and pypy3
 License:        LGPL-3.0
 URL:            https://github.com/FreeOpcUa/opcua-asyncio
 Source0:        %{url}/archive/refs/tags/v%{version}.tar.gz
 Patch0:         %{name}-disable-tests.patch
-Patch1:         %{name}-eso.patch
+Patch1:         %{name}-1217.patch
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -65,6 +65,9 @@ Summary:        %{summary}
 
 
 %changelog
+* Mon Feb 27 2023 Piotr Szubiakowski <pszubiak@eso.org> - 0.9.93-4
+- Replace ESO patch with upstream fix
+
 * Fri Feb 10 2023 Piotr Szubiakowski <pszubiak@eso.org> - 0.9.93-3
 - Add patch from ESO
 
