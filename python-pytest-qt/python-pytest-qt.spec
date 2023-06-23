@@ -1,12 +1,12 @@
 %global srcname pytest-qt
 
 Name:           python-%{srcname}
-Version:        4.0.2
+Version:        4.2.0
 Release:        1%{?dist}
 Summary:        pytest plugin that allows programmers to write tests for PySide, and PyQt applications.
 License:        MIT
 URL:            https://github.com/pytest-dev/pytest-qt
-Source0:        https://files.pythonhosted.org/packages/00/05/28a2b0a12446c6bf3852d445f28d2a3ce31155dc072af103e58f42fe7e8d/pytest-qt-4.0.2.tar.gz
+Source0:        https://files.pythonhosted.org/packages/a9/bc/b9ace56bded8ab9d37f078253b5d38e7b06c1447d2acd9c67a5ffa166ee0/pytest-qt-4.2.0.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -59,5 +59,8 @@ Summary:        %{summary}
 
 
 %changelog
+* Fri Jun 23 2023 Federico Pellegrin <fede@evolware.org> - 4.2.0-1
+- Bump to 4.2.0
+
 * Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 4.0.2-1
 - Init
