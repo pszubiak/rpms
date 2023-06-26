@@ -1,6 +1,6 @@
 Name:           waf
 Version:        2.0.23
-Release:        1%{?dist}.eso.2
+Release:        1%{?dist}.eso.3
 Summary:        A Python-based build system
 # The entire source code is BSD apart from pproc.py (taken from Python 2.5)
 License:        BSD and Python
@@ -20,6 +20,8 @@ Patch2:         waf-2.0.18-sphinx-no-W.patch
 Patch3:         waf-pyqt5-flag.patch
 # add sphinx multiple outputs
 Patch4:         waf-sphinx-multiple-outputs.patch
+# add sphinx doctree temp dir
+Patch5:         waf-sphinx-doctrees-temp-dir.patch
 
 # Enable building without html docs (e.g. in case no recent sphinx is
 # available)
@@ -141,6 +143,9 @@ rm -f docs/sphinx/build/html/.buildinfo
 
 
 %changelog
+* Wed Jun 22 2022 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.23-1.fc34.eso.3
+- Add waf-sphinx-multiple-outputs.patch
+
 * Wed Jun 22 2022 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.23-1.fc34.eso.2
 - Add waf-sphinx-multiple-outputs.patch
 

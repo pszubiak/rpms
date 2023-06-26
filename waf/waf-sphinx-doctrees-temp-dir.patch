@@ -1,0 +1,30 @@
+From b9d968a3be9f17fefd9bcaaa6fe76e690ec4634b Mon Sep 17 00:00:00 2001
+From: Federico Pellegrin <fede@evolware.org>
+Date: Tue, 20 Jun 2023 05:20:03 +0200
+Subject: [PATCH] sphinx: put doctrees temporary directory out of destination
+ dir
+
+This prevents the doctrees cache being installed in the install
+phase which is not desiderable. Each build has a private one,
+since each is a separate task and otherwise we can have race
+conditions.
+---
+ waflib/extras/sphinx.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/waflib/extras/sphinx.py b/waflib/extras/sphinx.py
+index 7d88f8ad..08f3cfd8 100644
+--- a/waflib/extras/sphinx.py
++++ b/waflib/extras/sphinx.py
+@@ -86,7 +86,7 @@ def get_install_path(object):
+ 
+ class SphinxBuildingTask(Task.Task):
+     color = 'BOLD'
+-    run_str = '${SPHINX_BUILD} -M ${SPHINX_OUTPUT_FORMAT} ${SRC} ${TGT} ${SPHINX_OPTIONS}'
++    run_str = '${SPHINX_BUILD} -M ${SPHINX_OUTPUT_FORMAT} ${SRC} ${TGT} -d ${TGT[0].bld_dir()}/doctrees-${SPHINX_OUTPUT_FORMAT} ${SPHINX_OPTIONS}'
+ 
+     def keyword(self):
+         return 'Compiling (%s)' % self.env.SPHINX_OUTPUT_FORMAT
+-- 
+GitLab
+
