@@ -143,8 +143,8 @@ rm -f docs/sphinx/build/html/.buildinfo
 
 
 %changelog
-* Wed Jun 22 2022 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.23-1.fc34.eso.3
-- Add waf-sphinx-multiple-outputs.patch
+* Mon Jun 26 2023 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.23-1.fc34.eso.3
+- Add waf-sphinx-doctrees-temp-dir.patch
 
 * Wed Jun 22 2022 Piotr Szubiakowski <pszubiak@eso.org> - 2.0.23-1.fc34.eso.2
 - Add waf-sphinx-multiple-outputs.patch
