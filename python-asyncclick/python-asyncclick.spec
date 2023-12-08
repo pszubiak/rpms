@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        8.0.3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        AsyncClick is a fork of Click that works well with trio or asyncio.
 License:        BSD-3-Clause
 URL:            https://github.com/python-trio/asyncclick
@@ -18,6 +18,8 @@ BuildRequires:  %{py3_dist packaging}
 BuildRequires:  %{py3_dist pluggy}
 BuildRequires:  %{py3_dist py}
 BuildRequires:  %{py3_dist pytest}
+
+Requires:  %{py3_dist anyio}
 
 
 %global _description %{expand:
@@ -70,5 +72,8 @@ Summary:        %{summary}
 
 
 %changelog
-* Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 8.0.3.2
+* Fri Dec 08 2023 Federico Pellegrin <fede@evolware.org> - 8.0.3.2-2
+- Add missing anyio runtime dependency
+
+* Tue May 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 8.0.3.2-1
 - Init
