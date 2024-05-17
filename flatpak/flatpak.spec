@@ -42,6 +42,7 @@ BuildRequires:  systemd
 BuildRequires:  /usr/bin/xdg-dbus-proxy
 BuildRequires:  /usr/bin/xmlto
 BuildRequires:  /usr/bin/xsltproc
+BuildRequires:  python36
 
 Requires:       bubblewrap >= %{bubblewrap_version}
 Requires:       librsvg2%{?_isa}
