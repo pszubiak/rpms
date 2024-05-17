@@ -10,10 +10,6 @@ License:        LGPLv2+
 URL:            http://flatpak.org/
 Source0:        https://github.com/flatpak/flatpak/releases/download/%{version}/%{name}-%{version}.tar.xz
 
-%if 0%{?fedora}
-# Add Fedora flatpak repositories
-Source1:        flatpak-add-fedora-repos.service
-%endif
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1935508
 Patch0:         flatpak-dir-Use-SHA256-not-SHA1-to-name-the-cache-for-a-filt.patch
