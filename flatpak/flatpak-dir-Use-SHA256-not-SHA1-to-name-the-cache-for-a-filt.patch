@@ -1,0 +1,38 @@
+From 7dd160f33054863b1ea6f75ac279a42121a16430 Mon Sep 17 00:00:00 2001
+From: Debarshi Ray <debarshir@gnome.org>
+Date: Mon, 31 Jan 2022 21:17:29 +0100
+Subject: [PATCH] dir: Use SHA256, not SHA1, to name the cache for a filtered
+ remote
+
+SHA1 hashes are considered weak these days. Some distributions have
+static analysis tools to detect the use of such weak hashes, and they
+get triggered by flatpak. While this particular use of SHA1 in flatpak
+is likely not security sensitive, it's also easy to move to SHA256 to
+avoid any debate.
+
+Here, the SHA1 hash of a named remote's filter file is used to generate
+the name of the directory where the refs from that remote are cached.
+One can reasonably assume that the cache is frequently invalidated
+because the list of refs on the remote changes all the time. Hence,
+it's not big problem if it gets invalidated once more because of this
+change.
+---
+ common/flatpak-dir.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/flatpak-dir.c b/common/flatpak-dir.c
+index 18384bd432fc..c6d08e85b41f 100644
+--- a/common/flatpak-dir.c
++++ b/common/flatpak-dir.c
+@@ -10923,7 +10923,7 @@ remote_filter_load (GFile *path, GError **error)
+     }
+ 
+   filter = g_new0 (RemoteFilter, 1);
+-  filter->checksum = g_compute_checksum_for_data (G_CHECKSUM_SHA1, (guchar *)data, data_size);
++  filter->checksum = g_compute_checksum_for_data (G_CHECKSUM_SHA256, (guchar *)data, data_size);
+   filter->path = g_object_ref (path);
+   filter->mtime = mtime;
+   filter->last_mtime_check = g_get_monotonic_time ();
+-- 
+2.34.1
+
