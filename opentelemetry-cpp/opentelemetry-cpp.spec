@@ -22,7 +22,7 @@ BuildRequires:  libcurl-devel
 BuildRequires:  openssl-devel
 BuildRequires:  thrift-devel
 BuildRequires:  zlib-ng-compat-devel
-BuildRequires:  zlib-ng-compat-static # To satisfy GRPC CMake 
+BuildRequires:  zlib-ng-compat-static
 
 %description
 A language-specific implementation of OpenTelemetry in C++. OpenTelemetry is a collection of tools,
