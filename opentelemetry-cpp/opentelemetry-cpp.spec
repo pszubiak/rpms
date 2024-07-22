@@ -1,42 +1,37 @@
-%define         cpp_version         1.6.0
-%define         proto_version       0.18.0
+%define         cpp_version         1.16.1
+%define         proto_version       1.3.2
 
 Name:           opentelemetry-cpp
 Version:        %{cpp_version}
-Release:        3%{?dist}
+Release:        2%{?dist}
 Summary:        The C++ OpenTelemetry client
 License:        ASL-2.0
 URL:            https://opentelemetry.io
 Source0:        https://github.com/open-telemetry/%{name}/archive/v%{cpp_version}/%{name}-%{cpp_version}.tar.gz
-Source2:        opentelemetry_api.pc
-Source3:        opentelemetry_sdk.pc
-Patch0:         disable_curl_utests.patch
-Patch1:         cmake_adapt_to_shared_libraries.patch
 
 BuildRequires:  cmake
+BuildRequires:  g++
 BuildRequires:  gcc
 BuildRequires:  gmock-devel
 BuildRequires:  google-benchmark-devel
 BuildRequires:  grpc-devel
 BuildRequires:  gtest-devel
-BuildRequires:  g++
 BuildRequires:  json-devel
 BuildRequires:  libcurl-devel
+BuildRequires:  openssl-devel
 BuildRequires:  thrift-devel
-
-Requires:       opentelemetry-proto
 
 
 %description
 A language-specific implementation of OpenTelemetry in C++. OpenTelemetry is a collection of tools,
-APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data 
+APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data
 (metrics, logs, and traces) to help you analyze your software's performance and behavior.
 
 
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} == %{version}-%{release}
-
+Requires:       opentelemetry-proto-devel
 
 %description    devel
 The %{name}-devel package contains libraries and header files for
@@ -59,6 +54,7 @@ in the scope of OpenTelemetry project.
 
 
 %package -n     opentelemetry-proto-devel
+Version:        %{proto_version}
 Summary:        Development files for opentelemetry-proto
 Requires:       opentelemetry-proto%{?_isa} == %{proto_version}-%{release}
 
@@ -69,26 +65,25 @@ developing applications that use opentelemetry-proto.
 
 
 %prep
-%setup -T -a 1 -n %{name}-%{cpp_version}/third_party -c
-%autosetup -D -p 1 -n %{name}-%{cpp_version}
-# Replace Git submodule with SOURCE1
-rmdir third_party/opentelemetry-proto
-ln -rs ./third_party/opentelemetry-proto-%{proto_version} ./third_party/opentelemetry-proto
-# Trick CMake to treat SOURCE1 as Git submodule
-mkdir third_party/opentelemetry-proto/.git
+%autosetup -p 1 -n %{name}-%{cpp_version}
+%autosetup -T -D -a1
 
 
 %build
-%cmake -DWITH_OTLP=ON -DWITH_JAEGER=ON
+%cmake\
+ -DWITH_OTLP_GRPC=ON\
+ -DWITH_OTLP_HTTP=ON\
+ -DBUILD_SHARED_LIBS=ON\
+ -DWITH_BENCHMARK=OFF\
+ -DWITH_STL=ON\
+ -DOTELCPP_VERSIONED_LIBS=ON\
+ -DOTELCPP_PROTO_PATH=opentelemetry-proto-%{proto_version}
+
 %cmake_build
 
 
 %install
 %cmake_install
-
-# Install pkg-config files
-install -p -D -m644 %{SOURCE2} -t %{buildroot}/usr/lib64/pkgconfig/
-install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
 
 
 %check
@@ -96,16 +91,15 @@ install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
 
 
 %files
-%{_libdir}/libhttp_client_nosend.so
-%{_libdir}/libopentelemetry_common.so
-%{_libdir}/libopentelemetry_exporter_*.so
-%{_libdir}/libopentelemetry_http_client_curl.so
-%{_libdir}/libopentelemetry_metrics.so
-%{_libdir}/libopentelemetry_otlp_recordable.so
-%{_libdir}/libopentelemetry_resources.so
-%{_libdir}/libopentelemetry_trace.so
-%{_libdir}/libopentelemetry_version.so
-
+%{_libdir}/libopentelemetry_common.so.1*
+%{_libdir}/libopentelemetry_exporter_*.so.1*
+%{_libdir}/libopentelemetry_metrics.so.1*
+%{_libdir}/libopentelemetry_otlp_recordable.so.1*
+%{_libdir}/libopentelemetry_resources.so.1*
+%{_libdir}/libopentelemetry_trace.so.1*
+%{_libdir}/libopentelemetry_version.so.1*
+%{_libdir}/libopentelemetry_http_client_curl.so.1*
+%{_libdir}/libopentelemetry_logs.so.1*
 
 %doc README.md CHANGELOG.md
 %license LICENSE
@@ -113,7 +107,6 @@ install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
 
 %files devel
 %{_includedir}/opentelemetry/*.h
-%{_includedir}/opentelemetry/_metrics
 %{_includedir}/opentelemetry/baggage
 %{_includedir}/opentelemetry/common
 %{_includedir}/opentelemetry/context
@@ -127,12 +120,21 @@ install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
 %{_includedir}/opentelemetry/sdk
 %{_includedir}/opentelemetry/std
 %{_includedir}/opentelemetry/trace
+%{_libdir}/libopentelemetry_common.so
+%{_libdir}/libopentelemetry_exporter_*.so
+%{_libdir}/libopentelemetry_metrics.so
+%{_libdir}/libopentelemetry_otlp_recordable.so
+%{_libdir}/libopentelemetry_resources.so
+%{_libdir}/libopentelemetry_trace.so
+%{_libdir}/libopentelemetry_version.so
+%{_libdir}/libopentelemetry_http_client_curl.so
+%{_libdir}/libopentelemetry_logs.so
 %{_libdir}/cmake
 %{_libdir}/pkgconfig
 
 
 %files -n opentelemetry-proto
-%{_libdir}/libopentelemetry_proto.so
+%{_libdir}/libopentelemetry_proto*.so
 
 
 %files -n opentelemetry-proto-devel
@@ -140,13 +142,5 @@ install -p -D -m644 %{SOURCE3} -t %{buildroot}/usr/lib64/pkgconfig/
 
 
 %changelog
-* Thu Sep 08 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-3
-- Add API and SDK pkg-config files
-
-* Wed Sep 07 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-2
-- Switch build to shared libraries
-- Add opentelemetry-proto
-- Add -DWITH_OTLP=ON -DWITH_JAEGER=ON flags
-
-* Wed Aug 17 2022 Piotr Szubiakowski <pszubiak@eso.org> - 1.6.0-1
+* Mon Jul 15 2024 Piotr Szubiakowski <pszubiak@eso.org> - 1.16.1, proto-version 1.3.2
 - Init
