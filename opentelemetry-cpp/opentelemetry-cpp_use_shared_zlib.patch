@@ -1,0 +1,13 @@
+diff --git a/cmake/patch-imported-config.cmake b/cmake/patch-imported-config.cmake
+index a2d22ed3..e6a76c40 100644
+--- a/cmake/patch-imported-config.cmake
++++ b/cmake/patch-imported-config.cmake
+@@ -103,7 +103,7 @@ if(TARGET gRPC::grpc++)
+     gRPC::re2
+     gRPC::ssl
+     gRPC::crypto
+-    gRPC::zlibstatic
++    gRPC::zlib
+     gRPC::address_sorting
+     gRPC::gpr
+     gRPC::grpc
