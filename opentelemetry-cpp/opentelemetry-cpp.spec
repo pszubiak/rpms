@@ -67,7 +67,7 @@ developing applications that use opentelemetry-proto.
 
 %prep
 %autosetup -p 1 -n %{name}-%{cpp_version}
-%autosetup -T -D -a1
+%autosetup -N -T -D -a1
 
 
 %build
