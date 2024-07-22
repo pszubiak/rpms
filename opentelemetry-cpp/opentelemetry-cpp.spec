@@ -9,6 +9,7 @@ License:        ASL-2.0
 URL:            https://opentelemetry.io
 Source0:        https://github.com/open-telemetry/%{name}/archive/v%{cpp_version}/%{name}-%{cpp_version}.tar.gz
 Patch0:         opentelemetry-cpp_use_shared_zlib.patch
+Patch1:         disable_curl_utests.patch
 
 BuildRequires:  cmake
 BuildRequires:  g++
