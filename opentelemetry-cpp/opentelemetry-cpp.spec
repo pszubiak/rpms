@@ -20,7 +20,7 @@ BuildRequires:  json-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  openssl-devel
 BuildRequires:  thrift-devel
-BuildRequires:  zlib-devel
+BuildRequires:  zlib-ng-compat-devel
 
 %description
 A language-specific implementation of OpenTelemetry in C++. OpenTelemetry is a collection of tools,
