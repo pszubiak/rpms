@@ -3,7 +3,7 @@
 
 Name:           opentelemetry-cpp
 Version:        %{cpp_version}
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        The C++ OpenTelemetry client
 License:        ASL-2.0
 URL:            https://opentelemetry.io
